@@ -24,11 +24,12 @@ SECRET_KEY = 'ds@%e%&o+ro*^lki*(4f*k=j)(ga2g0fizn&%(me4#-g1d0iz$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['http://admin.fedax.cn']
 
 # Application definition
 
 INSTALLED_APPS = [
+    'polls.apps.PollsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -106,9 +107,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'PRC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
