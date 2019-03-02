@@ -62,7 +62,6 @@ class FeModule(models.Model):
 
     class Meta:
         app_label = 'blog'
-
         db_table = 'fe_module'
 
 
@@ -74,7 +73,6 @@ class FeOption(models.Model):
 
     class Meta:
         app_label = 'blog'
-
         db_table = 'fe_option'
 
 
@@ -87,5 +85,4 @@ class FeTag(models.Model):
 
     class Meta:
         app_label = 'blog'
-
         db_table = 'fe_tag'
