@@ -29,7 +29,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'polls.apps.PollsConfig',
+    'blog.apps.BlogConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -80,12 +80,23 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',  # 数据库引擎
         'HOST': '47.100.43.232',  # 主机
         'PORT': '3306',  # 数据库使用的端口
-        'NAME': 'django',  # 你要存储数据的库名，事先要创建之
+        'NAME': 'admin',  # 你要存储数据的库名，事先要创建之
         'USER': 'root',  # 数据库用户名
         'PASSWORD': '123456',  # 密码
+    },
+    'blog': {
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': '47.100.43.232',
+        'PORT': '3306',
+        'NAME': 'blog',
+        'USER': 'root',
+        'PASSWORD': '123456'
     }
 }
-
+DATABASE_ROUTERS = ['mysite.database_router.DatabaseAppsRouter']
+DATABASE_APPS_MAPPING = {
+    'blog': 'blog',
+}
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
