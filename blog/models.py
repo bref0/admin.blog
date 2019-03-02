@@ -8,34 +8,31 @@
 from django.db import models
 
 
-class FeArticle(models.Model):
+class Article(models.Model):
     article_title = models.CharField(max_length=50, verbose_name='标题')
-    article_tag_ids = models.CharField(max_length=50)
-    article_summary = models.CharField(max_length=255)
-    article_content = models.TextField()
-    article_status = models.IntegerField()
-    article_reading_volume = models.IntegerField()
-    article_like_volume = models.IntegerField()
-    article_comment_volume = models.IntegerField()
-    article_sticky_posts = models.IntegerField()
+    article_tag_ids = models.CharField(max_length=50, verbose_name='标签')
+    article_summary = models.CharField(max_length=255, verbose_name='摘要')
+    article_content = models.TextField(verbose_name='内容')
+    article_status = models.IntegerField(verbose_name='状态')
+    article_reading_volume = models.IntegerField(verbose_name='浏览量')
+    article_like_volume = models.IntegerField(verbose_name='点赞数')
+    article_comment_volume = models.IntegerField(verbose_name='评论数')
+    article_sticky_posts = models.IntegerField(verbose_name='是否置顶')
     create_time = models.PositiveIntegerField(blank=True, null=True, verbose_name='创建时间', editable=False)
     update_time = models.PositiveIntegerField(blank=True, null=True, verbose_name='更新时间')
     delete_time = models.IntegerField(blank=True, null=True, verbose_name='删除时间')
-
-    # pub_date = models.DateTimeField(u'发表时间', auto_now_add=True, editable=True)
-    # update_time = models.DateTimeField(u'更新时间', auto_now=True, null=True)
 
     def __str__(self):
         return self.article_title
 
     class Meta:
-        verbose_name = '文章列表'
-        verbose_name_plural = '文章列表'
+        verbose_name = '文章'
+        verbose_name_plural = '文章'
         app_label = 'blog'
         db_table = 'fe_article'
 
 
-class FeComment(models.Model):
+class Comment(models.Model):
     id = models.BigAutoField(primary_key=True)
     comment_article_id = models.BigIntegerField()
     comment_author_email = models.CharField(max_length=100)
@@ -48,11 +45,13 @@ class FeComment(models.Model):
     delete_time = models.IntegerField(blank=True, null=True)
 
     class Meta:
+        verbose_name = '评论'
+        verbose_name_plural = '评论'
         app_label = 'blog'
         db_table = 'fe_comment'
 
 
-class FeModule(models.Model):
+class Module(models.Model):
     module_name = models.CharField(max_length=30)
     module_route = models.CharField(max_length=30)
     module_status = models.IntegerField()
@@ -61,22 +60,26 @@ class FeModule(models.Model):
     delete_time = models.IntegerField(blank=True, null=True)
 
     class Meta:
+        verbose_name = '模块'
+        verbose_name_plural = '模块'
         app_label = 'blog'
         db_table = 'fe_module'
 
 
-class FeOption(models.Model):
+class Option(models.Model):
     option_name = models.CharField(unique=True, max_length=64)
     option_value = models.TextField(blank=True, null=True)
     update_time = models.IntegerField(blank=True, null=True)
     delete_time = models.IntegerField(blank=True, null=True)
 
     class Meta:
+        verbose_name = '配置'
+        verbose_name_plural = '配置'
         app_label = 'blog'
         db_table = 'fe_option'
 
 
-class FeTag(models.Model):
+class Tag(models.Model):
     tag_name = models.CharField(max_length=30)
     tag_desc = models.CharField(max_length=255)
     delete_time = models.IntegerField(blank=True, null=True)
@@ -84,5 +87,7 @@ class FeTag(models.Model):
     update_time = models.IntegerField(blank=True, null=True)
 
     class Meta:
+        verbose_name = '标签'
+        verbose_name_plural = '标签'
         app_label = 'blog'
         db_table = 'fe_tag'
