@@ -6,13 +6,14 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+from ckeditor.fields import RichTextField
 
 
 class Article(models.Model):
     article_title = models.CharField(max_length=50, verbose_name='标题')
     article_tag_ids = models.CharField(max_length=50, verbose_name='标签')
     article_summary = models.CharField(max_length=255, verbose_name='摘要')
-    article_content = models.TextField(verbose_name='内容')
+    article_content = RichTextField(verbose_name='内容')
     article_status = models.IntegerField(verbose_name='状态')
     article_reading_volume = models.IntegerField(verbose_name='浏览量')
     article_like_volume = models.IntegerField(verbose_name='点赞数')
