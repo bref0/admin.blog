@@ -45,6 +45,9 @@ class Comment(models.Model):
     create_time = models.IntegerField()
     delete_time = models.IntegerField(blank=True, null=True)
 
+    def __str__(self):
+        return self.id
+
     class Meta:
         verbose_name = '评论'
         verbose_name_plural = '评论'
@@ -60,6 +63,9 @@ class Module(models.Model):
     update_time = models.IntegerField(blank=True, null=True)
     delete_time = models.IntegerField(blank=True, null=True)
 
+    def __str__(self):
+        return self.module_name
+
     class Meta:
         verbose_name = '模块'
         verbose_name_plural = '模块'
@@ -72,6 +78,9 @@ class Option(models.Model):
     option_value = models.TextField(blank=True, null=True)
     update_time = models.IntegerField(blank=True, null=True)
     delete_time = models.IntegerField(blank=True, null=True)
+
+    def __str__(self):
+        return self.option_name
 
     class Meta:
         verbose_name = '配置'
@@ -86,6 +95,9 @@ class Tag(models.Model):
     delete_time = models.IntegerField(blank=True, null=True)
     create_time = models.IntegerField(blank=True, null=True)
     update_time = models.IntegerField(blank=True, null=True)
+
+    def __str__(self):
+        return self.tag_name
 
     class Meta:
         verbose_name = '标签'
