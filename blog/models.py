@@ -29,7 +29,7 @@ class Article(models.Model):
     create_time = models.PositiveIntegerField(blank=True,
                                               null=True,
                                               verbose_name='创建时间',
-                                              editable=False)
+                                              )
     update_time = models.PositiveIntegerField(blank=True,
                                               null=True,
                                               verbose_name='更新时间',

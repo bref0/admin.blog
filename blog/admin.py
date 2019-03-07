@@ -11,6 +11,11 @@ class ArticleAdmin(admin.ModelAdmin):
     empty_value_display = ' -- '
     ordering = ('-id',)
 
+    def get_readonly_fields(self, request, obj=None):
+        return self.readonly_fields
+
+    readonly_fields = ('create_time',)
+
 
 admin.site.register([Comment, Module, Option, Tag])
 
