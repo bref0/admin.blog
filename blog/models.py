@@ -21,7 +21,8 @@ class Article(models.Model):
     article_content = RichTextField(verbose_name='内容')
     article_status = models.IntegerField(verbose_name='状态',
                                          null=False,
-                                         choices=Article_Status_CHOICES)
+                                         choices=Article_Status_CHOICES,
+                                         default='1')
     article_reading_volume = models.IntegerField(verbose_name='浏览量')
     article_like_volume = models.IntegerField(verbose_name='点赞数')
     article_comment_volume = models.IntegerField(verbose_name='评论数')
