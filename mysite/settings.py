@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'simpleui',
     'blog.apps.BlogConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -186,3 +187,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# 首页配置
+# SIMPLEUI_HOME_PAGE = 'https://www.baidu.com'
+# 首页标题
+SIMPLEUI_HOME_TITLE = '百度一下你就知道'
+# 首页图标
+SIMPLEUI_HOME_ICON = 'layui-icon-rate'
