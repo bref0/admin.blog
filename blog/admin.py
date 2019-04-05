@@ -11,16 +11,23 @@ class ArticleAdmin(admin.ModelAdmin):
     search_fields = ('article_title',)
     empty_value_display = ' -- '
     list_filter = ('article_status',)  # 过滤器
-    # date_hierarchy = 'update_time'  # 详细时间分层筛选　
+    date_hierarchy = 'update_time'  # 详细时间分层筛选　
     ordering = ('-id',)
 
     def get_readonly_fields(self, request, obj=None):
         return self.readonly_fields
 
-    readonly_fields = ('create_time',)
+    readonly_fields = ('article_reading_volume', 'article_like_volume', 'article_comment_volume',)
 
 
-admin.site.register([Comment, Module, Option, Tag])
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'comment_article_id', 'create_time')
+    date_hierarchy = 'create_time'  # 详细时间分层筛选　
+    ordering = ('-id',)
+
+
+admin.site.register([Module, Option, Tag])
 
 admin.site.site_header = 'Fedax后台管理'
 admin.site.site_title = 'Fedax'

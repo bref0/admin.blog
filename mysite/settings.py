@@ -24,7 +24,7 @@ SECRET_KEY = 'ds@%e%&o+ro*^lki*(4f*k=j)(ga2g0fizn&%(me4#-g1d0iz$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 # Application definition
 
@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ckeditor',
     'ckeditor_uploader',
-]
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -49,7 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
+    ]
 
 ROOT_URLCONF = 'mysite.urls'
 
@@ -64,10 +64,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-            ],
+                ],
+            },
         },
-    },
-]
+    ]
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
@@ -86,7 +86,7 @@ DATABASES = {
         'NAME': 'admin',  # 你要存储数据的库名，事先要创建之
         'USER': 'root',  # 数据库用户名
         'PASSWORD': '123456',  # 密码
-    },
+        },
     'blog': {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': '47.100.43.232',
@@ -94,29 +94,29 @@ DATABASES = {
         'NAME': 'blog',
         'USER': 'root',
         'PASSWORD': '123456'
+        }
     }
-}
 DATABASE_ROUTERS = ['mysite.database_router.DatabaseAppsRouter']
 DATABASE_APPS_MAPPING = {
     'blog': 'blog',
-}
+    }
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
+        },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
+        },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
+        },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
+        },
+    ]
 
 # ckeditor config
 # media_confige
@@ -146,7 +146,7 @@ CKEDITOR_CONFIGS = {
             {'name': 'paragraph',
              'items': ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']},
             {'name': 'document', 'items': ['Source']},
-        ],
+            ],
         'toolbar': 'YourCustomToolbarConfig',  # put selected toolbar config here
         'width': '100%',
         'tabSpaces': 4,
@@ -164,16 +164,16 @@ CKEDITOR_CONFIGS = {
             'dialog',
             'dialogui',
             'elementspath'
-        ]),
+            ]),
+        }
     }
-}
 CKEDITOR_ALLOW_NONIMAGE_FILES = False
 CKEDITOR_BROWSE_SHOW_DIRS = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'zh-hans'
+LANGUAGE_CODE = 'zh-Hans'
 
 TIME_ZONE = 'Asia/Shanghai'
 
@@ -181,16 +181,16 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # 首页配置
-# SIMPLEUI_HOME_PAGE = 'https://www.baidu.com'
+SIMPLEUI_HOME_PAGE = 'http://fedax.cn'
 # 首页标题
-SIMPLEUI_HOME_TITLE = '百度一下你就知道'
+SIMPLEUI_HOME_TITLE = 'Fedax的博客'
 # 首页图标
 SIMPLEUI_HOME_ICON = 'layui-icon-rate'

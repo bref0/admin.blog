@@ -7,39 +7,65 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 from ckeditor.fields import RichTextField
-import datetime
 
 
 class Article(models.Model):
     Article_Status_CHOICES = (
         (1, '显示'),
         (2, '隐藏'),
-    )
-    article_title = models.CharField(max_length=50, verbose_name='标题')
-    article_tag_ids = models.CharField(max_length=50, verbose_name='标签')
-    article_summary = models.CharField(max_length=255, verbose_name='摘要')
+        )
+    Top_Status_CHOICES = (
+        (1, '是'),
+        (0, '否'),
+        )
+    article_title = models.CharField(
+        max_length=50,
+        verbose_name='标题')
+    article_thumb_img = models.CharField(
+        max_length=255,
+        default='',
+        verbose_name='封面缩略图')
+    article_tag_ids = models.CharField(
+        max_length=50,
+        verbose_name='标签')
+    article_summary = models.CharField(
+        max_length=255,
+        verbose_name='摘要')
     article_content = RichTextField(verbose_name='内容')
-    article_status = models.IntegerField(verbose_name='状态',
-                                         null=False,
-                                         choices=Article_Status_CHOICES,
-                                         default='1')
-    article_reading_volume = models.IntegerField(verbose_name='浏览量')
-    article_like_volume = models.IntegerField(verbose_name='点赞数')
-    article_comment_volume = models.IntegerField(verbose_name='评论数')
-    article_sticky_posts = models.IntegerField(verbose_name='是否置顶')
-    create_time = models.PositiveIntegerField(blank=True,
-                                              null=True,
-                                              verbose_name='创建时间',
-                                              )
-    update_time = models.PositiveIntegerField(blank=True,
-                                              null=True,
-                                              verbose_name='更新时间',
-                                              editable=False,
-                                              default=datetime.datetime.now)
-    delete_time = models.IntegerField(blank=True,
-                                      null=True,
-                                      editable=False,
-                                      verbose_name='删除时间')
+    article_status = models.IntegerField(
+        null=False,
+        choices=Article_Status_CHOICES,
+        default='1',
+        verbose_name='状态', )
+    article_reading_volume = models.IntegerField(
+        default=0,
+        verbose_name='浏览量', )
+    article_like_volume = models.IntegerField(
+        default=0,
+        verbose_name='点赞数', )
+    article_comment_volume = models.IntegerField(
+        default=0,
+        verbose_name='评论数')
+    article_sticky_posts = models.IntegerField(
+        verbose_name='是否置顶',
+        null=False,
+        choices=Top_Status_CHOICES,
+        default='0')
+    create_time = models.DateTimeField(
+        blank=True,
+        null=False,
+        auto_now_add=True,
+        verbose_name='创建时间', )
+    update_time = models.DateTimeField(
+        blank=True,
+        null=False,
+        auto_now=True,
+        verbose_name='更新时间', )
+    delete_time = models.DateTimeField(
+        blank=True,
+        null=True,
+        editable=False,
+        verbose_name='删除时间')
 
     def __str__(self):
         return self.article_title
@@ -59,9 +85,9 @@ class Comment(models.Model):
     comment_content = models.TextField()
     comment_approved = models.IntegerField()
     comment_parent = models.PositiveIntegerField()
-    update_time = models.IntegerField()
-    create_time = models.IntegerField()
-    delete_time = models.IntegerField(blank=True, null=True)
+    update_time = models.DateTimeField(verbose_name='更新时间', )
+    create_time = models.DateTimeField(verbose_name='创建时间', )
+    delete_time = models.DateTimeField(verbose_name='删除时间', blank=True, null=True)
 
     def __str__(self):
         return self.id
@@ -77,9 +103,9 @@ class Module(models.Model):
     module_name = models.CharField(max_length=30)
     module_route = models.CharField(max_length=30)
     module_status = models.IntegerField()
-    create_time = models.IntegerField(blank=True, null=True)
-    update_time = models.IntegerField(blank=True, null=True)
-    delete_time = models.IntegerField(blank=True, null=True)
+    create_time = models.DateTimeField(blank=True, null=True)
+    update_time = models.DateTimeField(blank=True, null=True)
+    delete_time = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
         return self.module_name
@@ -94,8 +120,8 @@ class Module(models.Model):
 class Option(models.Model):
     option_name = models.CharField(unique=True, max_length=64)
     option_value = models.TextField(blank=True, null=True)
-    update_time = models.IntegerField(blank=True, null=True)
-    delete_time = models.IntegerField(blank=True, null=True)
+    update_time = models.DateTimeField(blank=True, null=True)
+    delete_time = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
         return self.option_name
@@ -110,9 +136,9 @@ class Option(models.Model):
 class Tag(models.Model):
     tag_name = models.CharField(max_length=30)
     tag_desc = models.CharField(max_length=255)
-    delete_time = models.IntegerField(blank=True, null=True)
-    create_time = models.IntegerField(blank=True, null=True)
-    update_time = models.IntegerField(blank=True, null=True)
+    delete_time = models.DateTimeField(blank=True, null=True)
+    create_time = models.DateTimeField(blank=True, null=True)
+    update_time = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
         return self.tag_name
