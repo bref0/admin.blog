@@ -191,6 +191,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # 首页配置
 SIMPLEUI_HOME_PAGE = 'http://fedax.cn'
 # 首页标题
-SIMPLEUI_HOME_TITLE = 'Fedax的博客'
+SIMPLEUI_HOME_TITLE = 'Fedax博客'
 # 首页图标
 SIMPLEUI_HOME_ICON = 'layui-icon-rate'
