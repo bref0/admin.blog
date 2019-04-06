@@ -3,6 +3,17 @@ from django.contrib import admin
 from .models import Article, Comment, Module, Option, Tag
 
 
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    list_display = ('id', 'tag_name', 'update_time')
+    list_display_links = ('tag_name',)
+    list_per_page = 10
+    search_fields = ('tag_name',)
+    empty_value_display = ' -- '
+    date_hierarchy = 'update_time'  # 详细时间分层筛选　
+    ordering = ('-id',)
+
+
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('id', 'article_title', 'update_time')
@@ -27,7 +38,7 @@ class CommentAdmin(admin.ModelAdmin):
     ordering = ('-id',)
 
 
-admin.site.register([Module, Option, Tag])
+admin.site.register([Module, Option])
 
 admin.site.site_header = 'Fedax后台管理'
 admin.site.site_title = 'Fedax'

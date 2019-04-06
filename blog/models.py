@@ -9,6 +9,37 @@ from django.db import models
 from ckeditor.fields import RichTextField
 
 
+class Tag(models.Model):
+    tag_name = models.CharField(
+        max_length=30,
+        verbose_name='标签名')
+    tag_desc = models.CharField(
+        max_length=255,
+        verbose_name='标签描述')
+    create_time = models.DateTimeField(
+        null=False,
+        auto_now_add=True,
+        verbose_name='创建时间', )
+    update_time = models.DateTimeField(
+        null=False,
+        auto_now=True,
+        verbose_name='更新时间', )
+    delete_time = models.DateTimeField(
+        blank=True,
+        null=True,
+        editable=False,
+        verbose_name='删除时间')
+
+    def __str__(self):
+        return self.tag_name
+
+    class Meta:
+        verbose_name = '标签'
+        verbose_name_plural = '标签'
+        app_label = 'blog'
+        db_table = 'fe_tag'
+
+
 class Article(models.Model):
     Article_Status_CHOICES = (
         (1, '显示'),
@@ -21,15 +52,14 @@ class Article(models.Model):
     article_title = models.CharField(
         max_length=50,
         verbose_name='标题')
-    article_thumb_img = models.CharField(
+    article_thumb_img = models.ImageField(
         max_length=255,
         default='',
         verbose_name='封面缩略图')
-    article_tag_ids = models.CharField(
-        max_length=50,
-        verbose_name='标签')
+    tags = models.ManyToManyField(Tag)
     article_summary = models.CharField(
         max_length=255,
+        help_text='啊啊啊啊',
         verbose_name='摘要')
     article_content = RichTextField(verbose_name='内容')
     article_status = models.IntegerField(
@@ -52,12 +82,10 @@ class Article(models.Model):
         choices=Top_Status_CHOICES,
         default='0')
     create_time = models.DateTimeField(
-        blank=True,
         null=False,
         auto_now_add=True,
         verbose_name='创建时间', )
     update_time = models.DateTimeField(
-        blank=True,
         null=False,
         auto_now=True,
         verbose_name='更新时间', )
@@ -131,20 +159,3 @@ class Option(models.Model):
         verbose_name_plural = '配置'
         app_label = 'blog'
         db_table = 'fe_option'
-
-
-class Tag(models.Model):
-    tag_name = models.CharField(max_length=30)
-    tag_desc = models.CharField(max_length=255)
-    delete_time = models.DateTimeField(blank=True, null=True)
-    create_time = models.DateTimeField(blank=True, null=True)
-    update_time = models.DateTimeField(blank=True, null=True)
-
-    def __str__(self):
-        return self.tag_name
-
-    class Meta:
-        verbose_name = '标签'
-        verbose_name_plural = '标签'
-        app_label = 'blog'
-        db_table = 'fe_tag'

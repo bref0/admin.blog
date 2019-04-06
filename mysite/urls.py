@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path("favicon.ico", RedirectView.as_view(url='static/favicon.ico')),
+    path("media/", RedirectView.as_view(url='media')),
     ]
