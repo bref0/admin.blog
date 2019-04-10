@@ -56,7 +56,9 @@ class Article(models.Model):
         max_length=255,
         default='',
         verbose_name='封面缩略图')
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(
+        Tag,
+        verbose_name='标签')
     article_summary = models.CharField(
         max_length=255,
         help_text='啊啊啊啊',
