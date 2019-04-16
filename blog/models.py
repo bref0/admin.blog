@@ -54,6 +54,7 @@ class Article(models.Model):
         verbose_name='标题')
     article_thumb_img = models.ImageField(
         max_length=255,
+        blank=True,
         default='',
         verbose_name='封面缩略图')
     tags = models.ManyToManyField(
