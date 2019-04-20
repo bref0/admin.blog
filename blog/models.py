@@ -131,12 +131,35 @@ class Comment(models.Model):
 
 
 class Module(models.Model):
-    module_name = models.CharField(max_length=30)
-    module_route = models.CharField(max_length=30)
-    module_status = models.IntegerField()
-    create_time = models.DateTimeField(blank=True, null=True)
-    update_time = models.DateTimeField(blank=True, null=True)
-    delete_time = models.DateTimeField(blank=True, null=True)
+    Module_Status_CHOICES = (
+        (1, '显示'),
+        (0, '隐藏'),
+        )
+    module_name = models.CharField(
+        max_length=30,
+        verbose_name='模块名称', )
+    module_route = models.CharField(
+        max_length=30,
+        verbose_name='模块前端路由', )
+    module_status = models.IntegerField(
+        null=False,
+        choices=Module_Status_CHOICES,
+        default='1',
+        verbose_name='状态',
+        )
+    create_time = models.DateTimeField(
+        null=False,
+        auto_now_add=True,
+        verbose_name='创建时间', )
+    update_time = models.DateTimeField(
+        null=False,
+        auto_now=True,
+        verbose_name='更新时间', )
+    delete_time = models.DateTimeField(
+        blank=True,
+        null=True,
+        editable=False,
+        verbose_name='删除时间')
 
     def __str__(self):
         return self.module_name
