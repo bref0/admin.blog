@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Article, Comment, Module, Option, Tag
+from .models import Article, Comment, Module, Option, Tag, SinglePage
 
 
 @admin.register(Tag)
@@ -47,6 +47,17 @@ class TagAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):  # 禁止删除
         return False
+
+
+@admin.register(SinglePage)
+class SinglePageAdmin(admin.ModelAdmin):
+    list_display = ('id', 'page_name', 'page_route', 'update_time')
+    list_display_links = ('page_name',)
+    list_per_page = 10
+    search_fields = ('page_name', 'page_route')
+    empty_value_display = ' -- '
+    date_hierarchy = 'update_time'  # 详细时间分层筛选　
+    ordering = ('-id',)
 
 
 @admin.register(Comment)

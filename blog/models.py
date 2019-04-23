@@ -44,11 +44,11 @@ class Article(models.Model):
     Article_Status_CHOICES = (
         (1, '显示'),
         (2, '隐藏'),
-        )
+    )
     Top_Status_CHOICES = (
         (1, '是'),
         (0, '否'),
-        )
+    )
     article_title = models.CharField(
         max_length=50,
         verbose_name='标题')
@@ -134,7 +134,7 @@ class Module(models.Model):
     Module_Status_CHOICES = (
         (1, '显示'),
         (0, '隐藏'),
-        )
+    )
     module_name = models.CharField(
         max_length=30,
         verbose_name='模块名称', )
@@ -146,7 +146,7 @@ class Module(models.Model):
         choices=Module_Status_CHOICES,
         default='1',
         verbose_name='状态',
-        )
+    )
     create_time = models.DateTimeField(
         null=False,
         auto_now_add=True,
@@ -169,6 +169,40 @@ class Module(models.Model):
         verbose_name_plural = '模块'
         app_label = 'blog'
         db_table = 'fe_module'
+
+
+class SinglePage(models.Model):
+    page_name = models.CharField(
+        max_length=30,
+        verbose_name='页面名')
+    page_route = models.CharField(
+        max_length=255,
+        verbose_name='页面路由')
+    page_content = RichTextField(
+        verbose_name='页面内容')
+    create_time = models.DateTimeField(
+        null=False,
+        auto_now_add=True,
+        verbose_name='创建时间', )
+    update_time = models.DateTimeField(
+        null=False,
+        auto_now=True,
+        verbose_name='更新时间', )
+    delete_time = models.DateTimeField(
+        blank=True,
+        null=True,
+        editable=False,
+        verbose_name='删除时间')
+
+    def __str__(self):
+        return self.page_name
+
+    class Meta:
+        unique_together = (("page_route",),)
+        verbose_name = '单页'
+        verbose_name_plural = '单页'
+        app_label = 'blog'
+        db_table = 'fe_single_page'
 
 
 class Option(models.Model):

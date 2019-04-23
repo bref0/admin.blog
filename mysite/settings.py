@@ -83,19 +83,19 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # 数据库引擎
-        'HOST': '47.100.43.232',  # 主机
-        'PORT': '3306',  # 数据库使用的端口
-        'NAME': 'admin',  # 你要存储数据的库名，事先要创建之
-        'USER': 'root',  # 数据库用户名
-        'PASSWORD': '123456',  # 密码
+        'HOST': os.environ.get('mysqlhost', 'localhost'),  # 主机
+        'PORT': os.environ.get('mysqlport', '3306'),  # 数据库使用的端口
+        'NAME': os.environ.get('mysqladminname', 'admin'),  # 你要存储数据的库名，事先要创建之
+        'USER': os.environ.get('mysqladminuser', 'root'),  # 数据库用户名
+        'PASSWORD': os.environ.get('mysqladminpwd', '123456'),  # 密码
     },
     'blog': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': '47.100.43.232',
-        'PORT': '3306',
-        'NAME': 'blog',
-        'USER': 'root',
-        'PASSWORD': '123456'
+        'HOST': os.environ.get('mysqlhost', 'localhost'),
+        'PORT': os.environ.get('mysqlport', '3306'),
+        'NAME': os.environ.get('mysqlblogname', 'blog'),
+        'USER': os.environ.get('mysqlbloguser', 'blog'),
+        'PASSWORD': os.environ.get('mysqlblogpwd', '123456'),
     }
 }
 DATABASE_ROUTERS = ['mysite.database_router.DatabaseAppsRouter']
@@ -188,9 +188,3 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-# 首页配置
-SIMPLEUI_HOME_PAGE = 'http://fedax.cn'
-# 首页标题
-SIMPLEUI_HOME_TITLE = 'Fedax博客'
-# 首页图标
-SIMPLEUI_HOME_ICON = 'layui-icon-rate'
